@@ -35,6 +35,7 @@ namespace Grapevine.Edge
             {
                 endpoints.MapGrpcService<GreeterService>();
                 endpoints.MapGrpcService<FibonacciService>();
+                endpoints.MapGrpcService<TrigonometryService>();
 
                 endpoints.MapGet("/", async context =>
                 {
