@@ -1,11 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Grapevine.Edge.Services;
+using Grapevine.Edge;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 
-namespace Grapevine.Edge
+namespace Grapevine.Edge.Services
 {
     public class TrigonometryService : Trigonometry.TrigonometryBase
     {

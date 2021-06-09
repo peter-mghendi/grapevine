@@ -5,8 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\fibonacci.proto" GrpcServices="Server" />
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\trigonometry.proto" GrpcServices="Server" />
   </ItemGroup>
 

@@ -18,7 +18,6 @@ namespace Grapevine.Edge
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
-            services.AddSingleton<IFibonacciCalculator, FibonacciCalculator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,8 +32,6 @@ namespace Grapevine.Edge
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<GreeterService>();
-                endpoints.MapGrpcService<FibonacciService>();
                 endpoints.MapGrpcService<TrigonometryService>();
 
                 endpoints.MapGet("/", async context =>
