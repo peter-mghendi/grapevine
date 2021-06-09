@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Grapevine.Edge.Services;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 
@@ -11,7 +12,11 @@ namespace Grapevine.Edge
     public class FibonacciService : Fibonnaci.FibonnaciBase
     {
         private readonly ILogger<FibonacciService> _logger;
-        public FibonacciService(ILogger<FibonacciService> logger) => _logger = logger;
+
+        private readonly IFibonacciCalculator _fibonacciCalculator;
+
+        public FibonacciService(ILogger<FibonacciService> logger, IFibonacciCalculator fibonacciCalculator)
+            => (_logger, _fibonacciCalculator) = (logger, fibonacciCalculator);
 
         public override async Task StreamFibonacci(
             FibonacciRequest request,
@@ -21,7 +26,7 @@ namespace Grapevine.Edge
         {
             for (int i = request.Start; i < request.Start + request.Count; i++)
             {
-                var value = F(x: i);
+                var value = _fibonacciCalculator.Calculate(x: i);
                 var reply = new FibonacciReply()
                 {
                     Index = i,
@@ -35,7 +40,5 @@ namespace Grapevine.Edge
                 await Task.Delay(TimeSpan.FromSeconds(1));
             }
         }
-
-        private static int F(int x) => x < 2 ? x : F(x: x - 1) + F(x: x - 2);
     }
 }
