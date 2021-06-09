@@ -29,7 +29,7 @@ namespace Grapevine.Edge
                     Parity = value % 2 == 0 ? Parity.Even : Parity.Odd
                 };
 
-                _logger.LogInformation($"Computed value #${reply.Index}: ${value}");
+                _logger.LogInformation($"Computed value #{reply.Index}: {value}");
 
                 await responseStream.WriteAsync(reply);
                 await Task.Delay(TimeSpan.FromSeconds(1));

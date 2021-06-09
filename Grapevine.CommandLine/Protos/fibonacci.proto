@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option csharp_namespace = "Grapevine.CommandLine";
+
+package grapevine;
+
+// The greeting service definition.
+service Fibonnaci {
+  // Sends a stream of fibonacci numbers
+  rpc StreamFibonacci (FibonacciRequest) returns (stream FibonacciReply);
+}
+
+// The request message containing the user's name.
+message FibonacciRequest {
+  int32 start = 1;
+  int32 count = 2;
+}
+
+// The response message containing the greetings.
+message FibonacciReply {
+  int32 index = 1;
+  int32 value = 2;
+  Parity parity = 3;
+
+  enum Parity {
+    ODD = 0;
+    EVEN = 1;
+  }
+}
