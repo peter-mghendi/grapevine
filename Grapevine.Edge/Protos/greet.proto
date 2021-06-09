@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option csharp_namespace = "Grapevine.Edge";
 
-package greet;
+package grapevine;
 
 // The greeting service definition.
 service Greeter {
