@@ -68,7 +68,7 @@ Restore .NET dependencies using Nuget:
 > macOS doesn't support ASP.NET Core gRPC with TLS. Additional configuration is required to successfully run gRPC services on macOS. 
 For more information, see [this document](https://docs.microsoft.com/en-gb/aspnet/core/grpc/troubleshoot?view=aspnetcore-5.0#unable-to-start-aspnet-core-grpc-app-on-macos).
 
-To enable HTTPS during development, you need to [trust the HTTPS development certificate]:
+To enable HTTPS during development, you need to [trust the HTTPS development certificate](https://docs.microsoft.com/en-gb/aspnet/core/security/enforcing-ssl?view=aspnetcore-5.0#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos):
 
 > The following command doesn't work on Linux. See your Linux distribution's documentation for trusting a certificate.
 
