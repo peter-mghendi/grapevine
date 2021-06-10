@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grapevine.Edge", "Grapevine
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grapevine.CommandLine", "Grapevine.CommandLine\Grapevine.CommandLine.csproj", "{F34CC29C-25BF-4F8A-8032-F3F32DCA32E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grapevine.Web", "Grapevine.Web\Grapevine.Web.csproj", "{CC715932-96AF-4A87-B474-1F3DA0E3AC80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{F34CC29C-25BF-4F8A-8032-F3F32DCA32E5}.Release|x64.Build.0 = Release|Any CPU
 		{F34CC29C-25BF-4F8A-8032-F3F32DCA32E5}.Release|x86.ActiveCfg = Release|Any CPU
 		{F34CC29C-25BF-4F8A-8032-F3F32DCA32E5}.Release|x86.Build.0 = Release|Any CPU
+		{CC715932-96AF-4A87-B474-1F3DA0E3AC80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC715932-96AF-4A87-B474-1F3DA0E3AC80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC715932-96AF-4A87-B474-1F3DA0E3AC80}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CC715932-96AF-4A87-B474-1F3DA0E3AC80}.Debug|x64.Build.0 = Debug|Any CPU
+		{CC715932-96AF-4A87-B474-1F3DA0E3AC80}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CC715932-96AF-4A87-B474-1F3DA0E3AC80}.Debug|x86.Build.0 = Debug|Any CPU
+		{CC715932-96AF-4A87-B474-1F3DA0E3AC80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC715932-96AF-4A87-B474-1F3DA0E3AC80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC715932-96AF-4A87-B474-1F3DA0E3AC80}.Release|x64.ActiveCfg = Release|Any CPU
+		{CC715932-96AF-4A87-B474-1F3DA0E3AC80}.Release|x64.Build.0 = Release|Any CPU
+		{CC715932-96AF-4A87-B474-1F3DA0E3AC80}.Release|x86.ActiveCfg = Release|Any CPU
+		{CC715932-96AF-4A87-B474-1F3DA0E3AC80}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
