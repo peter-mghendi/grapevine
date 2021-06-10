@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "Grapevine.CommandLine";
+option csharp_namespace = "Grapevine.Web";
 
 package grapevine;
 

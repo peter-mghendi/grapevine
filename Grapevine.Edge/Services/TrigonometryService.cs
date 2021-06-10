@@ -20,16 +20,21 @@ namespace Grapevine.Edge.Services
         {
             for (int num = request.Start; num < request.Start + request.Count; num++)
             {
-                var reply = new TrigonometryReply()
+                // Check the cancellation token regularly so that the server will stop
+                // producing items if the client disconnects.
+                context.CancellationToken.ThrowIfCancellationRequested();
+
+                await responseStream.WriteAsync(message: new()
                 {
                     Num = num,
                     Sin = Math.Sin(num),
                     Cos = Math.Cos(num),
                     Tan = Math.Sin(num),
-                };
+                });
 
-                await responseStream.WriteAsync(reply);
-                await Task.Delay(TimeSpan.FromSeconds(1));
+                // Use the cancellationToken in other APIs that accept cancellation
+                // tokens so the cancellation can flow down to them.
+                await Task.Delay(TimeSpan.FromMilliseconds(request.Delay), context.CancellationToken);
             }
         }
     }

@@ -1,22 +1,35 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Grapevine.CommandLine;
 using Grpc.Core;
 using Grpc.Net.Client;
 
-const string address = "https://localhost:5001";
+// TODO CancellationToken support
 
-using var channel = GrpcChannel.ForAddress(address: address);
-var trigonometryClient = new Trigonometry.TrigonometryClient(channel: channel);
-var trigonometryRequest = new TrigonometryRequest { Start = 1, Count = 10000 };
-using var trigonometryCall = trigonometryClient.StreamTrigonometries(request: trigonometryRequest);
+await StreamFromGrpcServerAsync();
+// await StreamFromSignalRServerAsync();
 
-await foreach (var trigonometryReply in trigonometryCall.ResponseStream.ReadAllAsync())
+static async Task StreamFromGrpcServerAsync(CancellationToken cancellationToken = default)
 {
-    var message = $"Time\t: {DateTime.Now} \n"
-        + $"Num\t: {trigonometryReply.Num} \n"
-        + $"Sin\t: {trigonometryReply.Sin} \n" 
-        + $"Cos\t: {trigonometryReply.Cos} \n"
-        + $"Tan\t: {trigonometryReply.Tan} \n";
+    using var channel = GrpcChannel.ForAddress(address: "https://localhost:5001");
+    var trigonometryClient = new Trigonometry.TrigonometryClient(channel: channel);
+    var trigonometryRequest = new TrigonometryRequest { Start = 1, Count = 10000, Delay = 500 };
 
-    Console.WriteLine(message);
+    using var trigonometryCall = trigonometryClient.StreamTrigonometries(request: trigonometryRequest);
+    await foreach (var trigonometryReply in trigonometryCall.ResponseStream.ReadAllAsync())
+    {
+        var message = $"Time\t: {DateTime.Now} \n"
+            + $"Num\t: {trigonometryReply.Num} \n"
+            + $"Sin\t: {trigonometryReply.Sin} \n"
+            + $"Cos\t: {trigonometryReply.Cos} \n"
+            + $"Tan\t: {trigonometryReply.Tan} \n";
+
+        Console.WriteLine(message);
+    }
 }
+
+// static async Task StreamFromSignalRServerAsync(CancellationToken cancellationToken = default)
+// {
+//     throw new NotImplementedException();
+// }

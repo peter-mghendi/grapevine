@@ -14,6 +14,7 @@ service Trigonometry {
 message TrigonometryRequest {
   int32 start = 1;
   int32 count = 2;
+  int32 delay = 3;
 }
 
 // The response message containing the trigonometries.
