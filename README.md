@@ -1,4 +1,4 @@
-# grapevine
+# Grapevine
 Asynchronously broadcast gRPC streams over SignalR.
 
 # Introduction
@@ -28,7 +28,12 @@ Here's the summary:
     cd Grapevine.Edge
     dotnet run
     
-**The `dotnet run command will block usage of the terminal for the lifetime of the program. Therefore, the following commmands need to be run in a separate terminal window**
+> The following commands will need to be run in a separate console window.
+    
+    cd Grapevine.Edge
+    dotnet run
+    
+> The following commands will need to be run in a separate console window.
 
     cd Grapevine.CommandLine
     dotnet run
@@ -79,7 +84,12 @@ Start the gRPC server:
     cd Grapevine.Edge
     dotnet run
     
-In a separate console window, start a client application.
+In a separate console window, start the web/SignalR server:
+
+    cd Grapevine.Edge
+    dotnet run
+    
+(Optional) In a separate console window, start a client application: 
 
     cd Grapevine.CommandLine
     dotnet run
@@ -87,3 +97,5 @@ In a separate console window, start a client application.
 ### 5. Develop!
 
 You can now access the gRPC server at [http://localhost:5000](http://localhost:5000) or [https://localhost:5001](https://localhost:5001).
+
+The web/SignalR server can be accessed at [http://localhost:5002](http://localhost:5002) or [https://localhost:5003](https://localhost:5003).
