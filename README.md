@@ -2,7 +2,7 @@
 Asynchronously broadcast gRPC streams over SignalR.
 
 # Introduction
-This is a proof-of-concept on broadcasting [gRPC](https://grpc.io) streams asynchronously to front-end clients via either 
+This is a proof-of-concept on broadcasting [gRPC](https://grpc.io) streams asynchronously to front-end clients via
 [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API), [gRPC-web](https://grpc.io/docs/platforms/web/) 
 or [SignalR](https://dotnet.microsoft.com/apps/aspnet/signalr).
 
