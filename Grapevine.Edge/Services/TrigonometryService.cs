@@ -29,7 +29,7 @@ namespace Grapevine.Edge.Services
                     Num = num,
                     Sin = Math.Sin(num),
                     Cos = Math.Cos(num),
-                    Tan = Math.Sin(num),
+                    Tan = Math.Tan(num),
                 });
 
                 // Use the cancellationToken in other APIs that accept cancellation

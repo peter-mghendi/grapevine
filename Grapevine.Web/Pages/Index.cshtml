@@ -4,46 +4,44 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Grapevine</h1>
-    <p class="lead">Asynchronous streams with gRPC and SignalR.</p>
-</div>
-
 <div class="container">
-    <div class="row align-items-center">
-        <div class="col-12 col-md-4 form-group">
-            <label for="startInput">Start</label>
-            <input type="number" class="form-control" id="startInput" aria-describedby="startHelp">
-            <small id="startHelp" class="form-text text-muted">The number to start with.</small>
+    <div class="text-center">
+        <h1 class="display-4">Grapevine</h1>
+        <p class="lead">Asynchronous streams with gRPC and SignalR.</p>
+    </div>
+
+    <div>
+        <div class="row align-items-center">
+            <div class="col-12 col-md-4 form-group">
+                <label for="startInput">Start</label>
+                <input type="number" class="form-control" id="startInput" aria-describedby="startHelp">
+                <small id="startHelp" class="form-text text-muted">The number to start with.</small>
+            </div>
+            <div class="col-12 col-md-4 form-group">
+                <label for="countInput">Count</label>
+                <input type="number" class="form-control" id="countInput" aria-describedby="countHelp">
+                <small id="countHelp" class="form-text text-muted">The number of items to count.</small>
+            </div>
+            <div class="col-12 col-md-4 form-group">
+                <label for="delayInput">Delay</label>
+                <input type="number" class="form-control" id="delayInput" aria-describedby="delayHelp">
+                <small id="delayHelp" class="form-text text-muted">The delay between items.</small>
+            </div>
         </div>
-        <div class="col-12 col-md-4 form-group">
-            <label for="countInput">Count</label>
-            <input type="number" class="form-control" id="countInput" aria-describedby="countHelp">
-            <small id="countHelp" class="form-text text-muted">The number of items to count.</small>
-        </div>
-        <div class="col-12 col-md-4 form-group">
-            <label for="delayInput">Delay</label>
-            <input type="number" class="form-control" id="delayInput" aria-describedby="delayHelp">
-            <small id="delayHelp" class="form-text text-muted">The delay between items.</small>
+
+        <div class="d-flex">
+            <input type="button" id="startButton" class="btn btn-outline-primary mx-auto" value="Start!" />
         </div>
     </div>
-    
-    <div class="d-flex">
-        <input type="button" id="startButton" class="btn btn-outline-primary mx-auto" value="Start!" />
-    </div>  
-</div>
 
-<div class="row">
-    <div class="col-12">
-        <hr />
+    <hr />
+
+    <div>
+        <canvas id="chart" class="w-100" height="200"></canvas>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-12">
-        <ul id="list"></ul>
-    </div>
-</div>
-
+@section Scripts {
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/trigonometry.js"></script>
+}
