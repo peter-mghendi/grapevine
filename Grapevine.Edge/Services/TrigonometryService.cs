@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Grapevine.Edge;
+using Grapevine.Core.Messages;
+using Grapevine.Core.Services;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 

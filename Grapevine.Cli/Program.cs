@@ -1,35 +1,30 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Grapevine.CommandLine;
+using Grapevine.Core.Messages;
+using Grapevine.Core.Services;
 using Grpc.Core;
 using Grpc.Net.Client;
 using Microsoft.AspNetCore.SignalR.Client;
 
-Request request = new(Start: 1, Count: 100, Delay: 500);
+TrigonometryRequest request = new() { Start = 1, Count = 100, Delay = 500 };
 CancellationTokenSource cts = new(); // TODO 
 
 await StreamFromGrpcServerAsync(request: request, cancellationToken: cts.Token);
 await StreamFromSignalRServerAsync(request: request, cancellationToken: cts.Token);
 
-static async Task StreamFromGrpcServerAsync(Request request, CancellationToken cancellationToken)
+static async Task StreamFromGrpcServerAsync(TrigonometryRequest request, CancellationToken cancellationToken)
 {
     using var channel = GrpcChannel.ForAddress(address: "https://localhost:5001");
     var trigonometryClient = new Trigonometry.TrigonometryClient(channel: channel);
-    var trigonometryRequest = new TrigonometryRequest
-    {
-        Start = request.Start,
-        Count = request.Count,
-        Delay = request.Delay
-    };
 
-    using var trigonometryCall = trigonometryClient.StreamTrigonometries(request: trigonometryRequest);
+    using var trigonometryCall = trigonometryClient.StreamTrigonometries(request: request);
     var stream = trigonometryCall.ResponseStream.ReadAllAsync(cancellationToken: cancellationToken);
 
     await foreach (var reply in stream) DisplayTrigonometries(reply: reply);
 }
 
-static async Task StreamFromSignalRServerAsync(Request request, CancellationToken cancellationToken)
+static async Task StreamFromSignalRServerAsync(TrigonometryRequest request, CancellationToken cancellationToken)
 {
     await using var connection = new HubConnectionBuilder()
         .WithUrl(url: "https://localhost:5003/trigonometry")
@@ -44,9 +39,7 @@ static async Task StreamFromSignalRServerAsync(Request request, CancellationToke
     await connection.StartAsync(cancellationToken: cancellationToken);
     var stream = connection.StreamAsync<TrigonometryReply>(
         methodName: "Trigonometries",
-        arg1: request.Start,
-        arg2: request.Count,
-        arg3: request.Delay,
+        arg1: request,
         cancellationToken: cancellationToken
     );
 
@@ -59,6 +52,3 @@ static void DisplayTrigonometries(TrigonometryReply reply)
         + $"Sin\t: {reply.Sin} \n"
         + $"Cos\t: {reply.Cos} \n"
         + $"Tan\t: {reply.Tan} \n");
-
-// TODO: Just use TriginometryRequest everywhere
-record Request(int Start, int Count, int Delay);

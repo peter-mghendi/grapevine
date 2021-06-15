@@ -85,17 +85,17 @@ connection.start()
     });
 
 startButton.addEventListener("click", function (event) {
-    const start = parseInt(startInput.value);
-    const count = parseInt(countInput.value);
-    const delay = parseInt(delayInput.value);
+    const Start = parseInt(startInput.value);
+    const Count = parseInt(countInput.value);
+    const Delay = parseInt(delayInput.value);
 
-    connection.stream("Trigonometries", start, count, delay)
+    connection.stream("Trigonometries", { Start, Count, Delay })
         .subscribe({
             next: (item) => {
                 const data = chart.data;
                 data.labels = Array.isArray(data.labels) ? data.labels : [data.labels];
 
-                if (data.labels.length >= 20) {
+                if (data.labels.length > 20) {
                     data.labels.shift();
                     data.datasets[0].data.shift();
                     data.datasets[1].data.shift();

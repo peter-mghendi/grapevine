@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+import "messages.proto";
+
+option csharp_namespace = "Grapevine.Core.Services";
+
+package services;
+
+// The trigonometry service definition.
+service Trigonometry {
+  // Sends a stream of Trigonometry numbers
+  rpc StreamTrigonometries (messages.TrigonometryRequest) returns (stream messages.TrigonometryReply);
+}
