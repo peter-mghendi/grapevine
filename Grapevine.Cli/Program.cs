@@ -8,10 +8,40 @@ using Grpc.Net.Client;
 using Microsoft.AspNetCore.SignalR.Client;
 
 TrigonometryRequest request = new() { Start = 1, Count = 100, Delay = 500 };
-CancellationTokenSource cts = new(); // TODO 
 
-await StreamFromGrpcServerAsync(request: request, cancellationToken: cts.Token);
-await StreamFromSignalRServerAsync(request: request, cancellationToken: cts.Token);
+using var cts = new CancellationTokenSource();
+// cts.CancelAfter(TimeSpan.FromSeconds(10));
+
+var keyboardTask = Task.Run(() =>
+{
+    Console.WriteLine("Press any key to cancel.");
+    Console.ReadKey(intercept: true);
+
+    Console.WriteLine("Attempting to cancel stream.");
+    cts.Cancel();
+});
+
+// TODO: Is there a way to always get either OperationCancelledException or TaskCancelledException?
+try
+{
+    // Perform streams consecutively.
+    await StreamFromGrpcServerAsync(request: request, cancellationToken: cts.Token);
+    await StreamFromSignalRServerAsync(request: request, cancellationToken: cts.Token);
+
+    // Stream from both sources concurrently.
+    // Task.WaitAll(tasks: new[] {
+    //     StreamFromGrpcServerAsync(request: request, cancellationToken: cts.Token),
+    //     StreamFromSignalRServerAsync(request: request, cancellationToken: cts.Token)
+    // }, cancellationToken: cts.Token);
+}
+catch (RpcException)
+{
+    Console.WriteLine("gRPC stream was cancelled.");
+}
+catch (OperationCanceledException)
+{
+    Console.WriteLine("SignalR stream was cancelled.");
+}
 
 static async Task StreamFromGrpcServerAsync(TrigonometryRequest request, CancellationToken cancellationToken)
 {
@@ -21,7 +51,13 @@ static async Task StreamFromGrpcServerAsync(TrigonometryRequest request, Cancell
     using var trigonometryCall = trigonometryClient.StreamTrigonometries(request: request);
     var stream = trigonometryCall.ResponseStream.ReadAllAsync(cancellationToken: cancellationToken);
 
-    await foreach (var reply in stream) DisplayTrigonometries(reply: reply);
+    await foreach (var reply in stream)
+    {
+        // Check the cancellation token regularly so that the server will stop
+        // producing items if the client disconnects.
+        cancellationToken.ThrowIfCancellationRequested();
+        DisplayTrigonometries(reply: reply);
+    }
 }
 
 static async Task StreamFromSignalRServerAsync(TrigonometryRequest request, CancellationToken cancellationToken)
@@ -43,7 +79,13 @@ static async Task StreamFromSignalRServerAsync(TrigonometryRequest request, Canc
         cancellationToken: cancellationToken
     );
 
-    await foreach (var reply in stream) DisplayTrigonometries(reply: reply);
+    await foreach (var reply in stream)
+    {
+        // Check the cancellation token regularly so that the server will stop
+        // producing items if the client disconnects.
+        cancellationToken.ThrowIfCancellationRequested();
+        DisplayTrigonometries(reply: reply);
+    }
 }
 
 static void DisplayTrigonometries(TrigonometryReply reply)

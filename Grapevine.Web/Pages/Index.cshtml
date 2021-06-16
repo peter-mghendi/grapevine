@@ -17,20 +17,30 @@
                 <input type="number" class="form-control" id="startInput" aria-describedby="startHelp">
                 <small id="startHelp" class="form-text text-muted">The number to start with.</small>
             </div>
+
             <div class="col-12 col-md-4 form-group">
                 <label for="countInput">Count</label>
                 <input type="number" class="form-control" id="countInput" aria-describedby="countHelp">
                 <small id="countHelp" class="form-text text-muted">The number of items to count.</small>
             </div>
+
             <div class="col-12 col-md-4 form-group">
                 <label for="delayInput">Delay</label>
                 <input type="number" class="form-control" id="delayInput" aria-describedby="delayHelp">
-                <small id="delayHelp" class="form-text text-muted">The delay between items.</small>
+                <small id="delayHelp" class="form-text text-muted">The delay between items (in ms).</small>
             </div>
-        </div>
 
-        <div class="d-flex">
-            <input type="button" id="startButton" class="btn btn-outline-primary mx-auto" value="Start!" />
+            <div class="col-12 col-md-4 d-flex">
+                <input type="button" id="startButton" class="btn btn-outline-success mx-auto" value="Start" disabled/>
+            </div>
+
+            <div class="col-12 col-md-4 d-flex">
+                <input type="button" id="stopButton" class="btn btn-outline-danger mx-auto" value="Stop" disabled/>
+            </div>
+
+            <div class="col-12 col-md-4 d-flex">
+                <input type="button" id="resetButton" class="btn btn-outline-secondary mx-auto" value="Reset" disabled/>
+            </div>
         </div>
     </div>
 

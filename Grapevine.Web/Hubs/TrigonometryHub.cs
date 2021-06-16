@@ -24,6 +24,9 @@ namespace Grapevine.Web.Hubs
             using var trigonometryCall = trigonometryClient.StreamTrigonometries(request: request, cancellationToken: cancellationToken);
             var replyStream = trigonometryCall.ResponseStream.ReadAllAsync(cancellationToken: cancellationToken);
             
+            // This doesn't work
+            // REF: https://stackoverflow.com/a/65921074
+            // REF: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/async-streams#syntax-1
             // return replyStream;
 
             await foreach (var trigonometryReply in replyStream)
