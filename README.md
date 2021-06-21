@@ -17,6 +17,8 @@ or [SignalR](https://dotnet.microsoft.com/apps/aspnet/signalr).
 
 Please check the [official .NET documentation](https://dotnet.microsoft.com/download) for installation instructions before you start.
 
+> All console commands are written for the Windows Command Prompt and may not produce the desired effects when used in other terminals.
+
 ### 0. TL;DR Command List
 
 Here's the summary:
@@ -25,18 +27,9 @@ Here's the summary:
     cd grapevine
     dotnet restore
     dotnet dev-certs https --trust
-    cd Grapevine.Edge
-    dotnet run
-    
-> The following commands will need to be run in a separate console window.
-    
-    cd Grapevine.Edge
-    dotnet run
-    
-> The following commands will need to be run in a separate console window.
-
-    cd Grapevine.CommandLine
-    dotnet run
+    start dotnet run Grapevine.Edge
+    start dotnet run Grapevine.Web
+    start dotnet run Grapevine.Cli
 
 ### 1. Clone the repository
 
@@ -81,18 +74,15 @@ To enable HTTPS during development, you need to [trust the HTTPS development cer
 
 Start the gRPC server:
 
-    cd Grapevine.Edge
-    dotnet run
+    start dotnet run Grapevine.Edge
     
-In a separate console window, start the web/SignalR server:
+Start the web/SignalR server:
 
-    cd Grapevine.Edge
-    dotnet run
+    start dotnet run Grapevine.Edge
     
-(Optional) In a separate console window, start a client application: 
+(Optional) Start a client application: 
 
-    cd Grapevine.CommandLine
-    dotnet run
+    start dotnet run Grapevine.Cli
     
 ### 5. Develop!
 
