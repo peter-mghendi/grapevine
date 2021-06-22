@@ -27,9 +27,9 @@ Here's the summary:
     cd grapevine
     dotnet restore
     dotnet dev-certs https --trust
-    start dotnet run Grapevine.Edge
-    start dotnet run Grapevine.Web
-    start dotnet run Grapevine.Cli
+    start dotnet run -p Grapevine.Edge
+    start dotnet run -p Grapevine.Web
+    start dotnet run -p Grapevine.Cli
 
 ### 1. Clone the repository
 
@@ -74,15 +74,15 @@ To enable HTTPS during development, you need to [trust the HTTPS development cer
 
 Start the gRPC server:
 
-    start dotnet run Grapevine.Edge
+    start dotnet run -p Grapevine.Edge
     
 Start the web/SignalR server:
 
-    start dotnet run Grapevine.Edge
+    start dotnet run -p Grapevine.Edge
     
 (Optional) Start a client application: 
 
-    start dotnet run Grapevine.Cli
+    start dotnet run -p Grapevine.Cli
     
 ### 5. Develop!
 
