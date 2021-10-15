@@ -13,7 +13,7 @@ or [SignalR](https://dotnet.microsoft.com/apps/aspnet/signalr).
 ## Prerequisites
 
 - [Git](https://git-scm.com) - Version Control System.
-- [.NET 5](https://dot.net) - Free, cross-platform, open source developer platform for building all your apps.
+- [.NET 5](https://dot.net) or later - Free, cross-platform, open source developer platform for building all your apps.
 
 ## Installation
 
@@ -29,9 +29,9 @@ Here's the summary:
     cd grapevine
     dotnet restore
     dotnet dev-certs https --trust
-    start dotnet run -p Grapevine.Edge
-    start dotnet run -p Grapevine.Web
-    start dotnet run -p Grapevine.Cli
+    start dotnet run --project Grapevine.Edge
+    start dotnet run --project Grapevine.Web
+    start dotnet run --project Grapevine.Cli
 
 ### 1. Clone the repository
 
@@ -76,15 +76,15 @@ To enable HTTPS during development, you need to [trust the HTTPS development cer
 
 Start the gRPC server:
 
-    start dotnet run -p Grapevine.Edge
+    start dotnet run --project Grapevine.Edge
     
 Start the web/SignalR server:
 
-    start dotnet run -p Grapevine.Edge
+    start dotnet run --project Grapevine.Web
     
 (Optional) Start a client application: 
 
-    start dotnet run -p Grapevine.Cli
+    start dotnet run --project Grapevine.Cli
     
 ### 5. Develop!
 
